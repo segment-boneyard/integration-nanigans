@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 0.10.32
+    version: 0.10.26
 checkout:
   post:
     - echo "_auth = `printf $AUTH`" > npmrc
