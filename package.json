@@ -21,7 +21,6 @@
   "devDependencies": {
     "istanbul": "^0.3.0",
     "jscs": "^1.6.2",
-    "make-lint": "~1.0.1",
     "mocha": "*",
     "segmentio-integration-tester": "^1.0.5",
     "should": "~4.0.4"

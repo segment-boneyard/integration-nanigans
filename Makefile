@@ -3,11 +3,12 @@ TESTS = $(wildcard test/*.js)
 SRC = $(wildcard lib/*.js)
 GREP ?=.
 
-ifndef NODE_ENV
-include node_modules/make-lint/index.mk
-endif
+build: node_modules
 
-test: lint test-style
+node_modules: package.json
+	@npm install 
+
+test:
 	@TZ=UTC ./node_modules/.bin/mocha $(TESTS) \
 		--timeout 20000 \
 		--require should \
@@ -16,19 +17,18 @@ test: lint test-style
 		--grep "$(GREP)"
 
 test-cov:
-	@node_modules/.bin/istanbul cover \
-		node_modules/.bin/_mocha $(TESTS) \
-			--report lcovonly \
-			-- -u exports \
+	@TZ=UTC ./node_modules/.bin/istanbul cover \
+	  node_modules/.bin/_mocha -- $(TESTS) \
 			--timeout 20s \
 			--require should \
 			--reporter spec \
-			--inline-diffs
+			--inline-diffs \
+			--ui exports
 
 test-style:
 	@node_modules/.bin/jscs lib
 
 clean:
-	rm -rf coverage
+	rm -rf coverage node_modules *.log
 
-.PHONY: test
+.PHONY: test test-cov test-style build
