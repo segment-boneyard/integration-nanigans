@@ -16,7 +16,7 @@
     "batch": "^0.5.1",
     "extend": "^2.0.0",
     "segmentio-facade": "^2.0.2",
-    "segmentio-integration": "^2.3.3"
+    "segmentio-integration": "^2.3.4"
   },
   "devDependencies": {
     "istanbul": "^0.3.0",
