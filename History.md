@@ -1,4 +1,11 @@
 
+1.1.1 / 2014-11-21
+==================
+
+ * Bumping segmentio-integration
+ * Fix circle badge
+ * update circle
+
 1.1.0 / 2014-11-07
 ==================
 
