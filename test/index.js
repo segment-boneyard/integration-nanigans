@@ -32,8 +32,7 @@ describe('Nanigans', function(){
       .channels(['server'])
       .endpoint('https://api.nanigans.com')
       .ensure('settings.events')
-      .ensure('settings.appId')
-      .retries(2);
+      .ensure('settings.appId');
   });
 
   describe('#validate', function(){
