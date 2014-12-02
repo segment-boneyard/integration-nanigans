@@ -23,7 +23,9 @@
     "jscs": "^1.6.2",
     "mocha": "*",
     "segmentio-integration-tester": "^1.0.5",
-    "should": "~4.0.4"
+    "should": "~4.0.4",
+    "integration-tester": "1.x",
+    "segmentio-facade": "2.x"
   },
   "publishConfig": {
     "registry": "https://segmentio.registry.nodejitsu.com"
