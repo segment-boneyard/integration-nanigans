@@ -1,12 +1,20 @@
+'use strict';
 
+/**
+ * Module dependencies.
+ */
+
+var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
-var crypto = require('crypto');
-var Nanigans = require('..');
+var md5 = require('../lib/nanigans/md5');
+
+/**
+ * Tests.
+ */
 
 describe('Nanigans', function(){
-  var nanigans;
-  var settings;
+  var nanigans, settings, test;
 
   beforeEach(function(){
     settings = {
@@ -118,7 +126,7 @@ describe('Nanigans', function(){
         .query({ ut1: md5('email') })
         .query({ type: 'user' })
         .end(function(err, responses){
-          responses.forEach(function(res){ assert(res.ok); })
+          responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
@@ -145,7 +153,7 @@ describe('Nanigans', function(){
         .query({ type: 'purchase' })
         .query({ name: 'main' })
         .end(function(err, responses){
-          responses.forEach(function(res){ assert(res.ok); })
+          responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
@@ -158,24 +166,10 @@ describe('Nanigans', function(){
         .query({ app_id: settings.appId })
         .query({ name: 'landing' })
         .query({ type: 'visit' })
-        .expects(200, done)
+        .expects(200, done);
     });
   });
 });
-
-/**
- * md5 hash the string
- *
- * @param {String} string
- * @return {String}
- */
-
-function md5(string){
-  return crypto
-    .createHash('md5')
-    .update(string)
-    .digest('hex');
-}
 
 /**
  * Helper method for creating an event in the settings object
