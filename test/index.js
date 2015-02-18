@@ -1,12 +1,12 @@
+'use strict';
 
+var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
-var crypto = require('crypto');
-var Nanigans = require('..');
+var md5 = require('../lib/nanigans/md5');
 
 describe('Nanigans', function(){
-  var nanigans;
-  var settings;
+  var nanigans, settings, test;
 
   beforeEach(function(){
     settings = {
@@ -162,20 +162,6 @@ describe('Nanigans', function(){
     });
   });
 });
-
-/**
- * md5 hash the string
- *
- * @param {String} string
- * @return {String}
- */
-
-function md5(string){
-  return crypto
-    .createHash('md5')
-    .update(string)
-    .digest('hex');
-}
 
 /**
  * Helper method for creating an event in the settings object
