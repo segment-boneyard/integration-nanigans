@@ -1,9 +1,17 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
+
 var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
 var md5 = require('../lib/nanigans/md5');
+
+/**
+ * Tests.
+ */
 
 describe('Nanigans', function(){
   var nanigans, settings, test;
@@ -118,7 +126,7 @@ describe('Nanigans', function(){
         .query({ ut1: md5('email') })
         .query({ type: 'user' })
         .end(function(err, responses){
-          responses.forEach(function(res){ assert(res.ok); })
+          responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
@@ -145,7 +153,7 @@ describe('Nanigans', function(){
         .query({ type: 'purchase' })
         .query({ name: 'main' })
         .end(function(err, responses){
-          responses.forEach(function(res){ assert(res.ok); })
+          responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
@@ -158,7 +166,7 @@ describe('Nanigans', function(){
         .query({ app_id: settings.appId })
         .query({ name: 'landing' })
         .query({ type: 'visit' })
-        .expects(200, done)
+        .expects(200, done);
     });
   });
 });
