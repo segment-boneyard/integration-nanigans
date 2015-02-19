@@ -7,7 +7,7 @@
 var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
-var md5 = require('../lib/nanigans/md5');
+var sha256 = require('../lib/nanigans/sha256');
 
 /**
  * Tests.
@@ -95,7 +95,7 @@ describe('Nanigans', function(){
         .track(track)
         .query({ app_id: settings.appId })
         .query({ user_id: 'userId' })
-        .query({ ut1: md5('email') })
+        .query({ ut1: sha256('email') })
         .query({ name: 'product' })
         .query({ sku: '1' })
         .query({ type: 'user' })
@@ -123,7 +123,7 @@ describe('Nanigans', function(){
         .query({ app_id: settings.appId })
         .query({ name: 'add_to_cart' })
         .query({ user_id: 'userId' })
-        .query({ ut1: md5('email') })
+        .query({ ut1: sha256('email') })
         .query({ type: 'user' })
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
@@ -148,7 +148,7 @@ describe('Nanigans', function(){
         .query({ qty: ['1', '2'], sku: ['1', '2'], value: ['1', '2'] })
         .query({ app_id: settings.appId })
         .query({ user_id: 'userId' })
-        .query({ ut1: md5('email') })
+        .query({ ut1: sha256('email') })
         .query({ unique: 'orderId' })
         .query({ type: 'purchase' })
         .query({ name: 'main' })
