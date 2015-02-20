@@ -7,15 +7,17 @@
 var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
+var sinon = require('sinon');
 
 /**
  * Tests.
  */
 
 describe('Nanigans', function(){
-  var nanigans, settings, test;
+  var nanigans, sandbox, settings, test;
 
   beforeEach(function(){
+    sandbox = sinon.sandbox.create();
     settings = {
       appId: 123,
       events: [
@@ -31,6 +33,7 @@ describe('Nanigans', function(){
   beforeEach(function(){
     nanigans = new Nanigans(settings);
     test = Test(nanigans, __dirname);
+    sandbox.restore();
   });
 
   it('should have correct settings', function(){
@@ -61,23 +64,25 @@ describe('Nanigans', function(){
   describe('#track', function(){
     it('should not make any calls for no matched events', function(done){
       var data = test.fixture('track-nonexistent-event');
+      var spy = sandbox.spy(nanigans, 'get');
 
       test
         .track(data.input)
-        .end(function(err, responses){
-          assert.equal(responses.length, 0);
+        .end(function(err){
+          assert(!spy.called);
           done(err);
         });
     });
 
     it('should send multiple calls for multiple matched events', function(done){
       var data = test.fixture('track-multiple-matched');
+      var spy = sandbox.spy(nanigans, 'get');
 
       test
         .track(data.input)
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
-          assert.equal(responses.length, 2);
+          assert(spy.calledTwice);
           done(err);
         });
     });
