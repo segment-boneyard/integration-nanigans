@@ -46,6 +46,7 @@ describe('Nanigans', function(){
   });
 
   describe('#validate', function(){
+    // FIXME: Not true when mobile
     it('should be invalid without .appId', function(){
       delete settings.appId;
       test.invalid({}, settings);
@@ -68,6 +69,7 @@ describe('Nanigans', function(){
 
       test
         .track(data.input)
+        .pathname('/event.php')
         .end(function(err){
           assert(!spy.called);
           done(err);
@@ -80,6 +82,7 @@ describe('Nanigans', function(){
 
       test
         .track(data.input)
+        .pathname('/event.php')
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           assert(spy.calledTwice);
@@ -93,6 +96,7 @@ describe('Nanigans', function(){
       test
         .track(data.input)
         .query(data.output)
+        .pathname('/event.php')
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
@@ -105,6 +109,7 @@ describe('Nanigans', function(){
       test
         .track(data.input)
         .query(data.output)
+        .pathname('/event.php')
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
@@ -117,6 +122,22 @@ describe('Nanigans', function(){
       test
         .track(data.input)
         .query(data.output)
+        .pathname('/event.php')
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          done(err);
+        });
+    });
+
+    it('should send to the mobile endpoint when `settings.isMobile` is `true`', function(done){
+      var data = test.fixture('track-mobile');
+      settings.isMobile = true;
+      settings.facebookAppId = 345;
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .pathname('/mobile.php')
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
@@ -131,6 +152,19 @@ describe('Nanigans', function(){
       test
         .page(data.input)
         .query(data.output)
+        .pathname('/event.php')
+        .expects(200, done);
+    });
+
+    it('should send to the mobile endpoint when `settings.isMobile` is true', function(done){
+      var data = test.fixture('page-mobile');
+      settings.facebookAppId = 345;
+      settings.isMobile = true;
+
+      test
+        .page(data.input)
+        .query(data.output)
+        .pathname('/mobile.php')
         .expects(200, done);
     });
   });
