@@ -7,7 +7,6 @@
 var Nanigans = require('..');
 var Test = require('segmentio-integration-tester');
 var assert = require('assert');
-var sha256 = require('../lib/nanigans/sha256');
 
 /**
  * Tests.
@@ -22,9 +21,9 @@ describe('Nanigans', function(){
       events: [
         event('testEvent1', 'user', 'invite'),
         event('testEvent1', 'user', 'register'),
-        event('completed order', 'purchase', 'main'),
-        event('add to cart', 'user', 'add_to_cart'),
-        event('viewed product', 'user', 'product')
+        event('Completed Order', 'purchase', 'main'),
+        event('Added to Cart', 'user', 'add_to_cart'),
+        event('Viewed Product', 'user', 'product')
       ]
     };
   });
@@ -61,8 +60,10 @@ describe('Nanigans', function(){
 
   describe('#track', function(){
     it('should not make any calls for no matched events', function(done){
+      var data = test.fixture('track-nonexistent-event');
+
       test
-        .track({ event: 'uknown', userId: 'userId' })
+        .track(data.input)
         .end(function(err, responses){
           assert.equal(responses.length, 0);
           done(err);
@@ -70,8 +71,10 @@ describe('Nanigans', function(){
     });
 
     it('should send multiple calls for multiple matched events', function(done){
+      var data = test.fixture('track-multiple-matched');
+
       test
-        .track({ event: 'testEvent1', userId: 'userId' })
+        .track(data.input)
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           assert.equal(responses.length, 2);
@@ -79,79 +82,36 @@ describe('Nanigans', function(){
         });
     });
 
-    it('should send the correct data for \'product\' events', function(done){
-      var products = [
-        { sku: '1', price: 1, quantity: 1 },
-        { sku: '2', price: 2, quantity: 2 }
-      ];
-
-      var track = {};
-      track.properties = { products: products, orderId: 'orderId' };
-      track.context = { traits: { email: 'email' }};
-      track.event = 'viewed product';
-      track.userId = 'userId';
+    it('should send the correct data for `product` events', function(done){
+      var data = test.fixture('track-product');
 
       test
-        .track(track)
-        .query({ app_id: settings.appId })
-        .query({ user_id: 'userId' })
-        .query({ ut1: sha256('email') })
-        .query({ name: 'product' })
-        .query({ sku: '1' })
-        .query({ type: 'user' })
+        .track(data.input)
+        .query(data.output)
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
 
-    it('should send the correct data for \'add_to_cart\' events', function(done){
-      var products = [
-        { sku: '1', price: 1, quantity: 1 },
-        { sku: '2', price: 2, quantity: 2 }
-      ];
-
-      var track = {};
-      track.properties = { products: products, orderId: 'orderId' };
-      track.context = { traits: { email: 'email' }};
-      track.event = 'add to cart';
-      track.userId = 'userId';
+    it('should send the correct data for `add_to_cart` events', function(done){
+      var data = test.fixture('track-add-to-cart');
 
       test
-        .track(track)
-        .query({ qty: ['1', '2'], sku: ['1', '2'], value: ['1', '2'] })
-        .query({ app_id: settings.appId })
-        .query({ name: 'add_to_cart' })
-        .query({ user_id: 'userId' })
-        .query({ ut1: sha256('email') })
-        .query({ type: 'user' })
+        .track(data.input)
+        .query(data.output)
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
         });
     });
 
-    it('should send the correct data for purchase events', function(done){
-      var products = [
-        { sku: '1', price: 1, quantity: 1 },
-        { sku: '2', price: 2, quantity: 2 }
-      ];
-
-      var track = {};
-      track.properties = { products: products, orderId: 'orderId' };
-      track.context = { traits: { email: 'email' }};
-      track.event = 'completed order';
-      track.userId = 'userId';
+    it('should send the correct data for `purchase` events', function(done){
+      var data = test.fixture('track-purchase');
 
       test
-        .track(track)
-        .query({ qty: ['1', '2'], sku: ['1', '2'], value: ['1', '2'] })
-        .query({ app_id: settings.appId })
-        .query({ user_id: 'userId' })
-        .query({ ut1: sha256('email') })
-        .query({ unique: 'orderId' })
-        .query({ type: 'purchase' })
-        .query({ name: 'main' })
+        .track(data.input)
+        .query(data.output)
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           done(err);
@@ -161,11 +121,11 @@ describe('Nanigans', function(){
 
   describe('#page', function(){
     it('should send the right data for page calls', function(done){
+      var data = test.fixture('page-basic');
+
       test
-        .page({})
-        .query({ app_id: settings.appId })
-        .query({ name: 'landing' })
-        .query({ type: 'visit' })
+        .page(data.input)
+        .query(data.output)
         .expects(200, done);
     });
   });
