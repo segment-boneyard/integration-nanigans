@@ -1,4 +1,16 @@
 
+1.2.0 / 2015-03-16
+==================
+
+  * Add ability to send to mobile endpoint
+  * Use spies to verify test results
+  * Convert tests to use external fixtures
+  * Change email hashing from MD5 to SHA256
+  * Fix style, missing semicolons
+  * Move md5 hashing function into module
+  * Clean up some style
+  * Update circle template
+
 1.1.5 / 2014-12-08
 ==================
 
