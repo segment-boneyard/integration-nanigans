@@ -19,7 +19,9 @@ describe('Nanigans', function(){
   beforeEach(function(){
     sandbox = sinon.sandbox.create();
     settings = {
-      appId: 123,
+      appId: '123',
+      mobile: false,
+      fbAppId: '345',
       events: [
         event('testEvent1', 'user', 'invite'),
         event('testEvent1', 'user', 'register'),
@@ -39,7 +41,7 @@ describe('Nanigans', function(){
   it('should have correct settings', function(){
     test
       .name('Nanigans')
-      .channels(['server'])
+      .channels(['mobile', 'server'])
       .endpoint('https://api.nanigans.com')
       .ensure('settings.events')
       .ensure('settings.appId');
@@ -56,6 +58,12 @@ describe('Nanigans', function(){
       test.invalid({}, settings);
     });
 
+    it('should be invalid when .isMobile is true but .fbAppId is not set', function(){
+      settings.isMobile = true;
+      settings.fbAppId = '';
+      test.invalid({}, settings);
+    });
+
     it('should validate successfully with complete settings', function(){
       test.valid({}, settings);
     });
@@ -68,8 +76,9 @@ describe('Nanigans', function(){
 
       test
         .track(data.input)
-        .end(function(err){
-          assert(!spy.called);
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          assert(!spy.called, 'Expected spy to have not been called');
           done(err);
         });
     });
@@ -122,6 +131,21 @@ describe('Nanigans', function(){
           done(err);
         });
     });
+
+    it('should send to the mobile endpoint when `.isMobile` is `true`', function(done){
+      var data = test.fixture('track-mobile');
+      var spy = sandbox.spy(nanigans, 'get');
+      settings.isMobile = true;
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
+          assert(spy.calledWithExactly('/mobile.php'));
+          done(err);
+        });
+    });
   });
 
   describe('#page', function(){
@@ -132,6 +156,21 @@ describe('Nanigans', function(){
         .page(data.input)
         .query(data.output)
         .expects(200, done);
+    });
+
+    it('should send to the mobile endpoint when `.isMobile` is `true`', function(done){
+      var data = test.fixture('page-mobile');
+      var spy = sandbox.spy(nanigans, 'get');
+      settings.isMobile = true;
+
+      test
+        .page(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
+          assert(spy.calledWithExactly('/mobile.php'));
+          done(err);
+        });
     });
   });
 });
