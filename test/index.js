@@ -41,7 +41,7 @@ describe('Nanigans', function(){
   it('should have correct settings', function(){
     test
       .name('Nanigans')
-      .channels(['mobile', 'server'])
+      .channels(['client', 'mobile', 'server'])
       .endpoint('https://api.nanigans.com')
       .ensure('settings.events')
       .ensure('settings.appId');
