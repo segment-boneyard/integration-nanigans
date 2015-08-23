@@ -1,0 +1,22 @@
+{
+  "input": {
+    "event": "Entered Contest",
+    "userId": "user-id",
+    "properties": {
+      "sport": "football"
+    },
+    "context": {
+      "traits": {
+        "email": "email"
+      },
+      "ip": "10.0.0.1"
+    }
+  },
+  "output": {
+    "app_id": 123,
+    "user_id": "user-id",
+    "ut1": "82244417f956ac7c599f191593f7e441a4fafa20a4158fd52e154f1dc4c8ed92",
+    "name": "entry_test_football",
+    "type": "user"
+  }
+}
