@@ -1,3 +1,10 @@
+
+1.2.2 / 2015-08-25
+==================
+
+  * Release 1.2.1
+  * Merge pull request #8 from segmentio/dynamic-events
+  * add dynamic track events
 Add dynamic event support
 1.2.1 / 2015-08-25
 ==================
