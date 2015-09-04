@@ -27,7 +27,8 @@ describe('Nanigans', function(){
         event('testEvent1', 'user', 'register'),
         event('Completed Order', 'purchase', 'main'),
         event('Added to Cart', 'user', 'add_to_cart'),
-        event('Viewed Product', 'user', 'product')
+        event('Viewed Product', 'user', 'product'),
+        event('Watched Game', 'visit', 'watched {{properties.league}} {{properties.sport}} game')
       ]
     };
   });
@@ -92,6 +93,20 @@ describe('Nanigans', function(){
         .end(function(err, responses){
           responses.forEach(function(res){ assert(res.ok); });
           assert(spy.calledTwice);
+          done(err);
+        });
+    });
+
+    it('should send interpolated page names', function(done){
+      var data = test.fixture('track-interpolated');
+      var spy = sandbox.spy(nanigans, 'get');
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          assert(spy.called);
           done(err);
         });
     });
