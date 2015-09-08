@@ -22,14 +22,13 @@ describe('Nanigans', function(){
       appId: '123',
       mobile: false,
       fbAppId: '345',
-      dynamicEvents: {name: 'entry_test', value: 'football'},
       events: [
         event('testEvent1', 'user', 'invite'),
         event('testEvent1', 'user', 'register'),
         event('Completed Order', 'purchase', 'main'),
         event('Added to Cart', 'user', 'add_to_cart'),
-        event('Entered Contest', 'user', 'entry_test'),
-        event('Viewed Product', 'user', 'product')
+        event('Viewed Product', 'user', 'product'),
+        event('Watched Game', 'visit', 'watched {{properties.league}} {{properties.sport}} game')
       ]
     };
   });
@@ -98,6 +97,20 @@ describe('Nanigans', function(){
         });
     });
 
+    it('should send interpolated page names', function(done){
+      var data = test.fixture('track-interpolated');
+      var spy = sandbox.spy(nanigans, 'get');
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          assert(spy.called);
+          done(err);
+        });
+    });
+
     it('should send the correct data for `product` events', function(done){
       var data = test.fixture('track-product');
 
@@ -112,18 +125,6 @@ describe('Nanigans', function(){
 
     it('should send the correct data for `add_to_cart` events', function(done){
       var data = test.fixture('track-add-to-cart');
-
-      test
-        .track(data.input)
-        .query(data.output)
-        .end(function(err, responses){
-          responses.forEach(function(res){ assert(res.ok); });
-          done(err);
-        });
-    });
-
-    it('should track dynamic named events', function(done){
-      var data = test.fixture('track-entered-contest');
 
       test
         .track(data.input)

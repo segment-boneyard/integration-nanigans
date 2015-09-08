@@ -1,0 +1,21 @@
+{
+  "input": {
+    "type": "track",
+    "timestamp": "2014",
+    "event": "Watched Game",
+    "userId": "user-id",
+    "properties": {
+      "sport": "football",
+      "league": "nfl"
+    },
+    "context": {
+      "ip": "10.0.0.1"
+    }
+  },
+  "output": {
+    "app_id": 123,
+    "user_id": "user-id",
+    "name": "watched nfl football game",
+    "type": "visit"
+  }
+}
