@@ -1,0 +1,34 @@
+{
+  "input": {
+    "type": "track",
+    "timestamp": "2016",
+    "event": "Viewed Product",
+    "userId": "12345",
+    "properties": {
+      "orderId": "order-id",
+      "products": [
+        { "sku": "1", "price": 1, "quantity": 1 },
+        { "sku": "2", "price": 2, "quantity": 2 }
+      ]
+    },
+    "context": {
+      "traits": {
+        "email": "email"
+      },
+      "ip": "10.0.0.1",
+      "device": {
+        "advertisingId": "7A3CBEA0-BDF5-11E4-8DFC-AA07A5B093DB" 
+      }
+    }
+  },
+  "output": {
+    "app_id": "123",
+    "advertising_id": "7A3CBEA0-BDF5-11E4-8DFC-AA07A5B093DB",
+    "fb_app_id": "345",
+    "user_id": "12345",
+    "ut1": "82244417f956ac7c599f191593f7e441a4fafa20a4158fd52e154f1dc4c8ed92",
+    "name": "product",
+    "sku": "1",
+    "type": "user"
+  }
+}
