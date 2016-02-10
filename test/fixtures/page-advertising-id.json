@@ -1,0 +1,15 @@
+{
+  "input": {
+  	"context": {
+  		"device": {
+  			"advertisingId": "7A3CBEA0-BDF5-11E4-8DFC-AA07A5B093DB" 
+  		}
+  	}
+  	},
+  "output": {
+    "app_id": 123,
+    "advertising_id": "7A3CBEA0-BDF5-11E4-8DFC-AA07A5B093DB",
+    "name": "landing",
+    "type": "visit"
+  }
+}

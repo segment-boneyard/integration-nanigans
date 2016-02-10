@@ -161,6 +161,35 @@ describe('Nanigans', function(){
           done(err);
         });
     });
+
+    it('should override to the mobile endpoint when sent from mobile library', function(done){
+      var data = test.fixture('track-mobile');
+      var spy = sandbox.spy(nanigans, 'get');
+      settings.isMobile = false;
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
+          assert(spy.calledWithExactly('/mobile.php'));
+          done(err);
+        });
+    });
+
+    it('should send advertisingId when provided', function(done){
+      var data = test.fixture('track-advertising-id');
+      var spy = sandbox.spy(nanigans, 'get');
+      settings.isMobile = true;
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
+          done(err);
+        });
+    });
   });
 
   describe('#page', function(){
@@ -184,6 +213,34 @@ describe('Nanigans', function(){
         .end(function(err, responses){
           responses.forEach(function(res) { assert(res.ok); });
           assert(spy.calledWithExactly('/mobile.php'));
+          done(err);
+        });
+    });
+
+    it('should override to the mobile endpoint when sent from mobile library', function(done){
+      var data = test.fixture('page-mobile');
+      var spy = sandbox.spy(nanigans, 'get');
+      settings.isMobile = false;
+
+      test
+        .page(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
+          assert(spy.calledWithExactly('/mobile.php'));
+          done(err);
+        });
+    });
+
+    it('should send advertisingId when provided', function(done){
+      var data = test.fixture('page-advertising-id');
+      var spy = sandbox.spy(nanigans, 'get');
+
+      test
+        .page(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res) { assert(res.ok); });
           done(err);
         });
     });
