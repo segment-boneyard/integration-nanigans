@@ -1,5 +1,11 @@
 {
-  "input": {},
+  "input": {
+  	"context": {
+	  	"device": {
+	       "type": "android"
+	     }
+  	}
+  },
   "output": {
     "app_id": "123",
     "fb_app_id": "345",
