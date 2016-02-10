@@ -1,4 +1,10 @@
 
+1.3.1 / 2016-02-10
+==================
+
+  * enforce all mobile data to hit mobile endpoint
+  * adding idfa to track and page
+
 1.3.0 / 2015-09-08
 ==================
 
