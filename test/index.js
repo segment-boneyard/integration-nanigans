@@ -23,11 +23,14 @@ describe('Nanigans', function(){
       mobile: false,
       fbAppId: '345',
       events: [
-        event('testEvent1', 'user', 'invite'),
-        event('testEvent1', 'user', 'register'),
-        event('Completed Order', 'purchase', 'main'),
-        event('Added to Cart', 'user', 'add_to_cart'),
-        event('Viewed Product', 'user', 'product')
+        event('testEvent1', 'user', 'invite', {}),
+        event('testEvent1', 'user', 'register', {}),
+        event('Completed Order', 'purchase', 'main', {}),
+        event('Added to Cart', 'user', 'add_to_cart', {}),
+        event('Viewed Product', 'user', 'product', {}),
+        event('Custom params', 'purchase', 'test_custom', {
+          'listing_hotel': 'hotel_id'
+        })
       ]
     };
   });
@@ -146,6 +149,18 @@ describe('Nanigans', function(){
           done(err);
         });
     });
+
+    it('should decorate custom parameters', function(done){
+      var data = test.fixture('track-custom-parameters');
+      var spy = sandbox.spy(nanigans, 'get');
+
+      test
+        .track(data.input)
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          done(err);
+        });
+    });
   });
 
   describe('#page', function(){
@@ -183,12 +198,13 @@ describe('Nanigans', function(){
  * @param {String} name
  */
 
-function event(key, type, name){
+function event(key, type, name, map){
   return {
     key: key,
     value: {
       type: type,
-      name: name
+      name: name,
+      customParameters: map
     }
   };
 }
