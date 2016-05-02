@@ -1,0 +1,25 @@
+{
+  "input": {
+    "type": "track",
+    "timestamp": "2014",
+    "event": "Custom Params",
+    "userId": "user-id",
+    "properties": {
+      "hotelId": "123456"
+    },
+    "context": {
+      "traits": {
+        "email": "email"
+      },
+      "ip": "10.0.0.1"
+    }
+  },
+  "output": {
+    "app_id": 123,
+    "user_id": "user-id",
+    "ut1": "82244417f956ac7c599f191593f7e441a4fafa20a4158fd52e154f1dc4c8ed92",
+    "name": "test_custom",
+    "type": "user",
+    "listing_hotel": "123456"
+  }
+}
