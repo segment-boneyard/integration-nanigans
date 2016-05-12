@@ -2,6 +2,7 @@
   "input": {
     "event": "Added to Cart",
     "userId": "user-id",
+    "timestamp": "2014",
     "properties": {
       "orderId": "order-id",
       "products": [
@@ -24,6 +25,7 @@
     "type": "user",
     "qty": ["1", "2"],
     "sku": ["1", "2"],
-    "value": ["1", "2"]
+    "value": ["1", "2"],
+    "e_ts": "1388534400"
   }
 }

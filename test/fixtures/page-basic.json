@@ -1,8 +1,11 @@
 {
-  "input": {},
+  "input": {
+  	"timestamp": "2014"
+  },
   "output": {
     "app_id": 123,
     "name": "landing",
-    "type": "visit"
+    "type": "visit",
+    "e_ts": "1388534400"
   }
 }

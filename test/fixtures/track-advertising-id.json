@@ -29,6 +29,7 @@
     "ut1": "82244417f956ac7c599f191593f7e441a4fafa20a4158fd52e154f1dc4c8ed92",
     "name": "product",
     "sku": "1",
-    "type": "user"
+    "type": "user",
+    "e_ts": "1451606400"
   }
 }

@@ -16,13 +16,13 @@
     "batch": "^0.5.1",
     "extend": "^2.0.0",
     "segmentio-facade": "^2.0.2",
-    "segmentio-integration": "^3.0.5"
+    "segmentio-integration": "^3.0.5",
+    "unix-time": "^1.0.1"
   },
   "devDependencies": {
     "istanbul": "^0.3.0",
     "jscs": "^1.6.2",
     "mocha": "*",
-    "segmentio-facade": "2.x",
     "segmentio-integration-tester": "1.x",
     "should": "~4.0.4",
     "sinon": "^1.12.2"
