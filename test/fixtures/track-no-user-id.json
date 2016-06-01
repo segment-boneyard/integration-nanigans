@@ -1,0 +1,30 @@
+{
+  "input": {
+    "event": "Completed Order",
+    "timestamp": "2014",
+    "properties": {
+      "orderId": "order-id",
+      "products": [
+        { "sku": "1", "price": 1, "quantity": 1 },
+        { "sku": "2", "price": 2, "quantity": 2 }
+      ]
+    },
+    "context": {
+      "traits": {
+        "email": "email"
+      },
+      "ip": "10.0.0.1"
+    }
+  },
+  "output": {
+    "app_id": 123,
+    "ut1": "82244417f956ac7c599f191593f7e441a4fafa20a4158fd52e154f1dc4c8ed92",
+    "name": "main",
+    "type": "purchase",
+    "unique": "order-id",
+    "qty": ["1", "2"],
+    "sku": ["1", "2"],
+    "value": ["1", "2"],
+    "e_ts": "1388534400"
+  }
+}

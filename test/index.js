@@ -190,6 +190,18 @@ describe('Nanigans', function(){
           done(err);
         });
     });
+
+    it('should not send user_id when it is not provided', function(done){
+      var data = test.fixture('track-no-user-id');
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          done(err);
+        });
+    });
   });
 
   describe('#page', function(){
