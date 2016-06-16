@@ -23,6 +23,7 @@
     "istanbul": "^0.3.0",
     "jscs": "^1.6.2",
     "mocha": "*",
+    "segmentio-facade": "2.x",
     "segmentio-integration-tester": "1.x",
     "should": "~4.0.4",
     "sinon": "^1.12.2"
