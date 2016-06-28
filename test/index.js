@@ -21,6 +21,7 @@ describe('Nanigans', function(){
     settings = {
       appId: '123',
       mobile: false,
+      revenueToCents: false,
       fbAppId: '345',
       events: [
         event('testEvent1', 'user', 'invite', []),
@@ -158,6 +159,20 @@ describe('Nanigans', function(){
 
     it('should send the correct data for `purchase` events', function(done){
       var data = test.fixture('track-purchase');
+
+      test
+        .track(data.input)
+        .query(data.output)
+        .end(function(err, responses){
+          responses.forEach(function(res){ assert(res.ok); });
+          done(err);
+        });
+    });
+
+
+    it('should send the correct data for `purchase` events when revenue to cents is enabled', function(done){
+      var data = test.fixture('track-revenue-to-cents');
+      settings.revenueToCents = true;
 
       test
         .track(data.input)
