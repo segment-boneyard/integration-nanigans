@@ -1,4 +1,14 @@
 
+1.3.6 / 2016-06-30
+==================
+
+  * Merge pull request #13 from segment-integrations/add-timestamp
+  * Update Badge
+  * Readd facade and add timestamp to customer parameters test.
+  * Fix merge conflict.
+  * No longer passing user_id if one is not present.
+  * Added timestamp for replay purposes.
+
 1.3.5 / 2016-06-28
 ==================
 
