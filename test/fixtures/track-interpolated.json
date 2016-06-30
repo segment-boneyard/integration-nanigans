@@ -16,6 +16,7 @@
     "app_id": 123,
     "user_id": "user-id",
     "name": "watched nfl football game",
-    "type": "visit"
+    "type": "visit",
+    "e_ts": "1388534400"
   }
 }

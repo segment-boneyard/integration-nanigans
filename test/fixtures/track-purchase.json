@@ -2,6 +2,7 @@
   "input": {
     "event": "Completed Order",
     "userId": "user-id",
+    "timestamp": "2014",
     "properties": {
       "orderId": "order-id",
       "products": [
@@ -25,6 +26,7 @@
     "unique": "order-id",
     "qty": ["1", "2"],
     "sku": ["1", "2"],
-    "value": ["1", "2"]
+    "value": ["1", "2"],
+    "e_ts": "1388534400"
   }
 }

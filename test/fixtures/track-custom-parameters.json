@@ -22,6 +22,7 @@
     "name": "test_custom",
     "type": "user",
     "listing_hotel": "123456",
-    "dude": "test"
+    "dude": "test",
+    "e_ts": "1388534400"
   }
 }

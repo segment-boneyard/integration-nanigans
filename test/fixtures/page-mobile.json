@@ -1,5 +1,6 @@
 {
   "input": {
+    "timestamp": "2014",
   	"context": {
 	  	"device": {
 	       "type": "android"
@@ -10,6 +11,7 @@
     "app_id": "123",
     "fb_app_id": "345",
     "name": "landing",
-    "type": "visit"
+    "type": "visit",
+    "e_ts": "1388534400"
   }
 }
