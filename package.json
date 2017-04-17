@@ -1,6 +1,6 @@
 {
   "name": "@segment/integration-nanigans",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Nanigans server-side integration",
   "author": "Segment <friends@segment.com>",
   "repository": {
