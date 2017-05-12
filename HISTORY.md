@@ -1,3 +1,7 @@
+1.5.0 / 2017-05-12
+==================
+
+  * Ensure that sku, value, and qty arrays are sent with indicies (?sku[0]=2&sku[1]=3 instead of ?sku=2&sku=3)
 
 1.4.3 / 2017-04-17
 ==================
